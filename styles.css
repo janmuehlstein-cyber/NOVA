@@ -43,3 +43,10 @@
 .modal label[hidden]{display:none!important}
 .event-row .inline-actions{margin-left:auto;align-items:center}
 @media(max-width:720px){.top-actions #global-theme-toggle{padding:7px 9px;font-size:10px}.event-row .inline-actions{gap:5px}.event-row .inline-actions .btn{padding:7px 8px}}
+
+/* v1.3.0: visible appearance control and reliable event form states */
+#global-theme-toggle{display:inline-flex!important;align-items:center;justify-content:center;min-height:36px;white-space:nowrap;border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-weight:700;cursor:pointer;z-index:2}
+.all-day-toggle{display:flex!important;align-items:center;gap:10px!important;cursor:pointer}
+.all-day-toggle input{flex:0 0 18px;width:18px;height:18px;accent-color:var(--accent2)}
+#event-time-label[hidden]{display:none!important}
+.event-row .inline-actions{display:flex;gap:6px}

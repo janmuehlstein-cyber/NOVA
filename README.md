@@ -2,7 +2,7 @@
 
 **Your life. Under control.** Eine local-first Lifestyle- und Produktivitäts-PWA, die NOVAs Nachrichten- und Kalenderidee mit PULSEs persönlichem Tages-Dashboard verbindet.
 
-## Features in v1.2.0
+## Features in v1.3.0
 
 - Dashboard mit Daily Pulse, Terminen, Aufgaben, Routinen und Monats-Finanzüberblick
 - Lokaler Assistent mit Kontext aus NOVA-Kalender, Aufgaben und Routinen
