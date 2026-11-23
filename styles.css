@@ -36,3 +36,10 @@
 :root[data-theme="light"] .mobile-nav button.active{color:#526b32}
 :root[data-theme="light"] .toast{background:#526b32;color:white}
 .all-day-toggle{display:flex!important;grid-template-columns:auto 1fr;align-items:center;justify-content:flex-start;gap:9px!important;padding:3px 0}.all-day-toggle input{width:17px;height:17px;accent-color:var(--accent2)}
+:root[data-theme="light"] .top-actions #global-theme-toggle{background:#fff;color:#46503d;border-color:#d8ded0}
+:root[data-theme="light"] .event-time{color:#526b32}
+:root[data-theme="light"] .event-marker{background:#718a4c}
+:root[data-theme="light"] .modal label[hidden]{display:none!important}
+.modal label[hidden]{display:none!important}
+.event-row .inline-actions{margin-left:auto;align-items:center}
+@media(max-width:720px){.top-actions #global-theme-toggle{padding:7px 9px;font-size:10px}.event-row .inline-actions{gap:5px}.event-row .inline-actions .btn{padding:7px 8px}}

@@ -2,12 +2,12 @@
 
 **Your life. Under control.** Eine local-first Lifestyle- und Produktivitäts-PWA, die NOVAs Nachrichten- und Kalenderidee mit PULSEs persönlichem Tages-Dashboard verbindet.
 
-## Features in v1.0
+## Features in v1.2.0
 
 - Dashboard mit Daily Pulse, Terminen, Aufgaben, Routinen und Monats-Finanzüberblick
 - Lokaler Assistent mit Kontext aus NOVA-Kalender, Aufgaben und Routinen
 - Nachrichtenanalyse mit Absichtserkennung und bearbeitbaren Antwortvorschlägen
-- Monatskalender mit Terminverwaltung, Löschen und `.ics`-Export
+- Monatskalender mit Erstellen, Bearbeiten, Löschen und `.ics`-Export
 - Aufgabenliste mit Fälligkeit und Erledigt-Status
 - Routinen-Tracker mit täglichem Abhaken
 - Manuelle Einnahmen-/Ausgabenübersicht
@@ -56,11 +56,17 @@ Statische PWA ohne Build-Schritt: HTML, CSS und Vanilla JavaScript. Dadurch ist 
 Private Projektbasis. Vor einer öffentlichen Weiterverwendung Lizenz ergänzen.
 
 
-## Version 1.1.0
+## Version 1.2.0 – Fehlerbehebungen und Kalender-Update
 
-- Fixed relative calendar queries: NOVA now resolves today, tomorrow, the day after tomorrow, explicit German dates (DD.MM[.YYYY]) and upcoming weekdays before filtering events.
-- Added an all-day event option. All-day events do not require a time and are exported as proper date-only iCalendar events.
-- Added a persistent light theme toggle in Settings; Dark Mode remains available.
-- Service-worker cache version bumped so deployed clients can receive the update.
+- Relative Datumsabfrage korrigiert: „übermorgen“ wird mit Unicode-sicherer Worterkennung erkannt und nicht mehr mit „morgen“ verwechselt.
+- NOVA filtert Kalendertermine nach dem ermittelten lokalen Datum; unterstützt „heute“, „morgen“, „übermorgen“, Datumsangaben und kommende Wochentage.
+- Hellmodus-Schalter ist jetzt dauerhaft direkt in der oberen Leiste sichtbar und zusätzlich in den Einstellungen vorhanden. Die Auswahl bleibt lokal gespeichert.
+- Ganztägige Termine blenden die Uhrzeit aus und benötigen keine Uhrzeit. Die Speicherung und der `.ics`-Export verwenden ein echtes Datum-ohne-Uhrzeit-Format.
+- Termine können im Kalender bearbeitet und gelöscht werden.
+- Service Worker verwendet eine neue Cache-Version, aktiviert sich sofort und prüft HTML/CSS/JavaScript bevorzugt frisch vom Server, damit alte App-Versionen nicht weiter angezeigt werden.
 
-After uploading this update to the `main` branch, reload the website. If an installed PWA still shows the old version, close it fully and reopen it; on desktop, a hard refresh may be needed once.
+### Update auf GitHub Pages
+
+1. ZIP entpacken und alle Dateien aus `nova-pulse` in das Root-Verzeichnis des bestehenden Repositorys hochladen.
+2. Vorhandene Dateien ersetzen und den Upload committen.
+3. Website neu laden. Falls eine installierte PWA noch die alte Version zeigt: App vollständig schließen und erneut öffnen; notfalls die Website einmal in Safari neu laden.
