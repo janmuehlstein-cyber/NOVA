@@ -50,3 +50,33 @@
 .all-day-toggle input{flex:0 0 18px;width:18px;height:18px;accent-color:var(--accent2)}
 #event-time-label[hidden]{display:none!important}
 .event-row .inline-actions{display:flex;gap:6px}
+
+
+/* v2.0.1 – Mobile navigation mirrors the desktop workspace */
+.hero-card::after{content:none!important;display:none!important}
+@media(max-width:720px){
+  .main{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+  .mobile-nav{
+    display:flex;position:fixed;left:0;right:0;bottom:0;
+    height:calc(72px + env(safe-area-inset-bottom));
+    padding:7px 4px calc(7px + env(safe-area-inset-bottom));
+    background:#151814f5;border-top:1px solid var(--line);
+    backdrop-filter:blur(15px);z-index:10;
+    justify-content:space-between;align-items:stretch;gap:0;
+  }
+  .mobile-nav button{
+    flex:1 1 0;min-width:0;width:0;padding:3px 1px;
+    background:transparent;border:0;color:#838b7c;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:4px;font-size:18px;line-height:1.1;border-radius:10px;
+  }
+  .mobile-nav button span{font-size:19px;line-height:1.1}
+  .mobile-nav button small{
+    display:block;font-size:clamp(7px,2.1vw,9px);line-height:1.1;
+    white-space:nowrap;letter-spacing:-.15px;
+  }
+  .mobile-nav button.active{color:var(--accent);background:#252a20}
+  :root[data-theme="light"] .mobile-nav{background:#fffffff2;border-color:var(--line)}
+  :root[data-theme="light"] .mobile-nav button{color:#75806b}
+  :root[data-theme="light"] .mobile-nav button.active{color:#526b32;background:#edf1e5}
+}

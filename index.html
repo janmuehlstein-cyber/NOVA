@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#10110f"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="application-name" content="NOVA PULSE"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="description" content="NOVA PULSE – dein persönlicher Assistent für Alltag, Planung und Fortschritt.">
   <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
-  <title>NOVA PULSE</title><link rel="stylesheet" href="styles.css?v=2.0.0">
+  <title>NOVA PULSE</title><link rel="stylesheet" href="styles.css?v=2.0.1">
 </head>
 <body>
 <div class="app-shell">
@@ -24,10 +24,10 @@
   <main class="main">
     <header class="topbar"><div class="mobile-brand"><span class="brand-mark">N</span><b>NOVA <i>PULSE</i></b></div><div class="top-context"><span class="live-dot"></span> PERSONAL SPACE <span class="top-divider">/</span> <span id="top-date">HEUTE</span></div><div class="top-actions"><button class="icon-btn" id="quick-add" title="Neuer Termin">＋</button><button class="btn btn-ghost btn-small" id="global-theme-toggle" type="button" title="Darstellung wechseln">☀ Hell</button><button class="avatar" data-page="settings" title="Einstellungen">J</button></div></header>
     <div class="content" id="app-content" aria-live="polite"></div>
-    <footer class="mobile-nav"><button class="active" data-page="dashboard">⌂<small>Home</small></button><button data-page="assistant">✳<small>KI</small></button><button data-page="calendar">▦<small>Plan</small></button><button data-page="habits">◉<small>Goals</small></button><button data-page="finance">⌁<small>Money</small></button></footer>
+    <footer class="mobile-nav" aria-label="Hauptnavigation"><button class="active" data-page="dashboard"><span>◫</span><small>Übersicht</small></button><button data-page="assistant"><span>✳</span><small>Assistent</small></button><button data-page="messages"><span>↗</span><small>Nachrichten</small></button><button data-page="calendar"><span>▦</span><small>Kalender</small></button><button data-page="habits"><span>◉</span><small>Routinen</small></button><button data-page="finance"><span>⌁</span><small>Finanzen</small></button></footer>
   </main>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <dialog id="event-dialog" class="modal"><form id="event-form"><div class="modal-head"><div><span class="eyebrow">KALENDER</span><h2 id="event-dialog-title">Neuer Termin</h2></div><button class="icon-btn" type="button" data-close="event-dialog">×</button></div><input type="hidden" name="eventId"><input type="hidden" name="externalId"><label>Titel<input name="title" required maxlength="80" placeholder="z. B. Training"></label><div class="form-grid"><label>Datum<input name="date" type="date" required></label><label id="event-time-label">Uhrzeit<input name="time" type="time" value="17:00" required></label></div><label class="all-day-toggle"><input name="allDay" type="checkbox"> Ganztägiger Termin</label><label>Speicherort<select name="calendarTarget"><option value="local">Nur in NOVA PULSE</option><option value="apple" id="apple-calendar-option" disabled>Apple Kalender (native App erforderlich)</option></select></label><label>Ort (optional)<input name="location" maxlength="100" placeholder="Wo findet es statt?"></label><label>Notiz (optional)<textarea name="note" rows="2" maxlength="300" placeholder="Weitere Informationen …"></textarea></label><div class="modal-actions"><button class="btn btn-ghost" type="button" data-close="event-dialog">Abbrechen</button><button class="btn btn-primary" type="submit">Termin speichern</button></div><p class="fine-print">NOVA zeigt vor jeder Änderung am Apple Kalender eine zusätzliche Bestätigung.</p></form></dialog>
-<script src="app.js?v=2.0.0"></script>
+<script src="app.js?v=2.0.1"></script>
 </body></html>

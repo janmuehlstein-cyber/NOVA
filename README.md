@@ -1,32 +1,105 @@
-# NOVA PULSE – iOS Apple Calendar Bridge
+# NOVA PULSE
 
-This folder contains the native iOS companion source required for direct Apple Calendar access. The public GitHub Pages PWA alone cannot access EventKit.
+**Your life. Under control.** Eine local-first Lifestyle- und Produktivitäts-PWA, die NOVAs Nachrichten- und Kalenderidee mit PULSEs persönlichem Tages-Dashboard verbindet.
 
-## What it does
+## Features in v2.0.0
 
-- Uses Apple's EventKit with **full calendar access** (needed to read, create, update and delete existing events).
-- Requests permission only after the user taps **Verbinden**.
-- Reads events for the visible planning range and maps them into NOVA.
-- Writes changes only after NOVA shows a separate confirmation dialog.
-- Refreshes when the calendar view is opened or the user taps Synchronisieren.
-- Keeps the EventKit bridge inside the iOS app; no iCloud password or calendar credentials are collected.
+- Dashboard mit Daily Pulse, Terminen, Aufgaben, Routinen und Monats-Finanzüberblick
+- Lokaler Assistent mit Kontext aus NOVA-Kalender, Aufgaben und Routinen
+- Nachrichtenanalyse mit Absichtserkennung und bearbeitbaren Antwortvorschlägen
+- Monatskalender mit Erstellen, Bearbeiten, Löschen und `.ics`-Export
+- Aufgabenliste mit Fälligkeit und Erledigt-Status
+- Routinen-Tracker mit täglichem Abhaken
+- Manuelle Einnahmen-/Ausgabenübersicht
+- Einstellungen, JSON-Backup und -Restore
+- Responsive iPhone-/Desktop-Oberfläche
+- Installierbare PWA mit Offline-App-Shell
+- Keine Anmeldung, kein Tracking, keine externe Datenbank
 
-## Build requirement
+## Lokal starten
 
-A Mac with Xcode 15 or newer and an iPhone running iOS 17 or newer are required to compile and install this native component. The current Windows-only workflow can edit the files and publish the PWA, but cannot compile/sign an iOS app. The project source is supplied here for an Xcode build; it is not an IPA and is not yet installed on the phone.
+`index.html` im Browser öffnen. Für PWA-Installation und Offline-Caching über einen lokalen Webserver oder GitHub Pages bereitstellen.
 
-## Create the Xcode target
+## Auf GitHub Pages veröffentlichen
 
-1. On a Mac, open Xcode and create **iOS → App**, Product Name `NOVAPulse`, Interface `SwiftUI`, Language `Swift`.
-2. Set deployment target to iOS 17.0 or newer.
-3. Add `NOVAPulseApp.swift`, `CalendarWebView.swift`, and `AppleCalendarService.swift` to the app target (copy files into project).
-4. Replace the generated Info.plist with this folder's `Info.plist`, or add the two calendar usage strings to the target's Info tab.
-5. Add `EventKit.framework` and `WebKit.framework` if Xcode doesn't link them automatically.
-6. Set a unique Bundle Identifier and select your own Apple Development signing team.
-7. Build and run on the iPhone. On first use, open Settings in NOVA and tap **Verbinden**, then grant full calendar access.
+1. ZIP entpacken.
+2. Den **Inhalt des Ordners `nova-pulse`** ins Root-Verzeichnis eines GitHub-Repositories hochladen (z. B. `nova-pulse`).
+3. In GitHub unter **Settings → Pages** `Deploy from a branch` auswählen.
+4. Branch `main`, Ordner `/ (root)` auswählen und speichern.
+5. Nach dem Deployment die Pages-URL auf dem iPhone in Safari öffnen → Teilen → **Zum Home-Bildschirm**.
 
-The WebView is pinned to `https://janmuehlstein-cyber.github.io/NOVA/`. If the GitHub account/repository URL changes, update the URL and allowed host in `CalendarWebView.swift`.
+## Datenschutz & wichtige Grenzen
 
-## Consent model
+- Kalender, Routinen, Aufgaben, Buchungen, Chatverlauf und Einstellungen werden in `localStorage` dieses Browsers gespeichert. Sie werden nicht mit GitHub synchronisiert.
+- GitHub Pages veröffentlicht den Quellcode öffentlich. Niemals private Nachrichten, Backups, API-Schlüssel oder persönliche Daten ins Repository hochladen.
+- Die Nachrichtenanalyse und der Assistent sind in dieser Version lokal und regelbasiert. Es gibt noch keine echte generative KI.
+- WhatsApp wird nicht direkt ausgelesen oder gesteuert. Nachrichten werden vom Nutzer manuell eingefügt.
+- Termine werden nur nach einer bewussten Aktion des Nutzers lokal angelegt. Es gibt keine automatische Kalenderänderung.
+- Der NOVA-Kalender ist zunächst ein eigener lokaler Kalender. `.ics`-Export ermöglicht den Import in Apple Kalender; eine direkte bidirektionale iCloud-Synchronisierung ist nicht enthalten.
+- Finanzen werden manuell erfasst. Es gibt keine Bankanbindung und keine Anlageberatung.
+- Google Fonts wird für optionale Schriftgestaltung eingebunden; bei Offline-Nutzung greift die Systemschrift.
 
-The JavaScript UI asks for confirmation before every create, update or delete call. The native bridge only executes the operation sent after that explicit action. Full access is requested because read + update + delete are required; write-only permission cannot support the requested bidirectional sync.
+## Architektur
+
+Statische PWA ohne Build-Schritt: HTML, CSS und Vanilla JavaScript. Dadurch ist das Projekt leicht zu verstehen, zu hosten und zu erweitern.
+
+## Nächste Ausbaustufen
+
+1. Geschütztes Backend für echte KI (API-Key ausschließlich serverseitig)
+2. Apple Kalender / CalDAV-Synchronisierung mit expliziter Freigabe und Bestätigung vor dem Erstellen
+3. Optionales Wetter-Modul mit bewusst ausgelöster Standortfreigabe
+4. Aufgaben mit Priorität, Projekten und Erinnerungen
+5. Automatisierte Tests und robuste lokale Datenmigration
+
+## Lizenz
+
+Private Projektbasis. Vor einer öffentlichen Weiterverwendung Lizenz ergänzen.
+
+
+## Version 1.2.0 – Fehlerbehebungen und Kalender-Update
+
+- Relative Datumsabfrage korrigiert: „übermorgen“ wird mit Unicode-sicherer Worterkennung erkannt und nicht mehr mit „morgen“ verwechselt.
+- NOVA filtert Kalendertermine nach dem ermittelten lokalen Datum; unterstützt „heute“, „morgen“, „übermorgen“, Datumsangaben und kommende Wochentage.
+- Hellmodus-Schalter ist jetzt dauerhaft direkt in der oberen Leiste sichtbar und zusätzlich in den Einstellungen vorhanden. Die Auswahl bleibt lokal gespeichert.
+- Ganztägige Termine blenden die Uhrzeit aus und benötigen keine Uhrzeit. Die Speicherung und der `.ics`-Export verwenden ein echtes Datum-ohne-Uhrzeit-Format.
+- Termine können im Kalender bearbeitet und gelöscht werden.
+- Service Worker verwendet eine neue Cache-Version, aktiviert sich sofort und prüft HTML/CSS/JavaScript bevorzugt frisch vom Server, damit alte App-Versionen nicht weiter angezeigt werden.
+
+### Update auf GitHub Pages
+
+1. ZIP entpacken und alle Dateien aus `nova-pulse` in das Root-Verzeichnis des bestehenden Repositorys hochladen.
+2. Vorhandene Dateien ersetzen und den Upload committen.
+3. Website neu laden. Falls eine installierte PWA noch die alte Version zeigt: App vollständig schließen und erneut öffnen; notfalls die Website einmal in Safari neu laden.
+
+
+## Version 2.0.0 – Apple Kalender Bridge (iOS companion)
+
+- Added an Apple Calendar connection panel in Settings.
+- Added a native WebKit message bridge for EventKit.
+- Apple events are listed beside local NOVA events in the calendar and can be refreshed manually or when opening the calendar.
+- New events can be saved to NOVA locally or to Apple Calendar.
+- Existing Apple events can be edited and deleted from NOVA. Every Apple create, edit, or delete operation requires an additional confirmation dialog.
+- Uses EventKit full access because bidirectional read/write/edit/delete requires it; permission is requested only after the user taps Connect (or explicitly chooses Apple Calendar when saving an event).
+- Added `ios/NOVAPulse.xcodeproj` and native Swift source.
+
+### Important: native iPhone app required
+
+The GitHub Pages PWA running in Safari cannot directly access EventKit. Direct Apple Calendar integration works only inside the supplied native iOS WebView app. Open `ios/NOVAPulse.xcodeproj` on a Mac with Xcode 15+ and build it for iOS 17+. The current Windows + iPhone setup can publish and use the PWA, but cannot compile/sign the native iOS app without access to a Mac/Xcode build environment. This ZIP contains the source project, not a signed IPA.
+
+The native WebView uses the existing GitHub Pages address configured in `ios/NOVAPulse/CalendarWebView.swift`. If the repository URL changes, update that URL and the allowed host there. The native app has separate WebView storage from Safari; export a NOVA JSON backup in Safari and import it into the native app if you want to transfer local NOVA data. Apple Calendar events themselves remain in Apple's calendar database.
+
+### Permission and privacy
+
+- iOS displays the calendar permission prompt. NOVA does not collect Apple ID credentials or iCloud passwords.
+- Full access is required for the requested read, create, update, and delete workflow.
+- A separate in-app confirmation appears before each Apple Calendar mutation.
+- The iOS bridge only accepts messages from the bundled NOVA WebView; external links open outside the WebView.
+- Synchronization is refreshed when opening the calendar and with the Synchronize button; this version does not run background sync while the app is closed.
+
+
+## Version 2.0.1 – Mobile-Ansicht
+
+- Mobile Hauptnavigation entspricht jetzt den sechs Hauptbereichen der Desktop-Seitenleiste.
+- Beschriftungen und Symbole wurden für schmale iPhone-Bildschirme angepasst.
+- Das übergroße dekorative Sternsymbol im Dashboard wurde entfernt.
+- Cache-Version erhöht, damit Browser die aktualisierten Dateien neu laden.
