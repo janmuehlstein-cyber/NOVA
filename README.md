@@ -54,3 +54,13 @@ Statische PWA ohne Build-Schritt: HTML, CSS und Vanilla JavaScript. Dadurch ist 
 ## Lizenz
 
 Private Projektbasis. Vor einer öffentlichen Weiterverwendung Lizenz ergänzen.
+
+
+## Version 1.1.0
+
+- Fixed relative calendar queries: NOVA now resolves today, tomorrow, the day after tomorrow, explicit German dates (DD.MM[.YYYY]) and upcoming weekdays before filtering events.
+- Added an all-day event option. All-day events do not require a time and are exported as proper date-only iCalendar events.
+- Added a persistent light theme toggle in Settings; Dark Mode remains available.
+- Service-worker cache version bumped so deployed clients can receive the update.
+
+After uploading this update to the `main` branch, reload the website. If an installed PWA still shows the old version, close it fully and reopen it; on desktop, a hard refresh may be needed once.
