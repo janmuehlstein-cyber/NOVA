@@ -103,3 +103,12 @@ The native WebView uses the existing GitHub Pages address configured in `ios/NOV
 - Beschriftungen und Symbole wurden für schmale iPhone-Bildschirme angepasst.
 - Das übergroße dekorative Sternsymbol im Dashboard wurde entfernt.
 - Cache-Version erhöht, damit Browser die aktualisierten Dateien neu laden.
+
+
+## Version 2.1.0 – Verbesserungen
+
+- Lokale NOVA-Termine können wöchentlich, monatlich oder jährlich wiederholt werden. Die Wiederholungen erscheinen in der Kalenderansicht und im ICS-Export.
+- Apple-Kalender-Wiederholungen werden in dieser Version noch nicht über die native EventKit-Brücke geschrieben. Wiederholungen sind deshalb derzeit auf lokale NOVA-Termine beschränkt.
+- Bearbeitete Antwortvorschläge können als lokale Lernbeispiele gespeichert werden. NOVA kann passende gespeicherte Beispiele bei späteren ähnlichen Eingaben wiederverwenden. Das ist ein begrenztes lokales Lernsystem, kein Training eines KI-Modells.
+- Die Assistenz erkennt einfache Einladungen mit Datumsbezug und gleicht sie mit NOVA-Terminen ab. Sie formuliert eine Zu- oder Absage als Vorschlag; sie verschickt keine Nachricht und verändert keine Termine.
+- Die Unterhaltung wurde um weitere regelbasierte Alltagsantworten erweitert. Eine frei generierende KI ist weiterhin nicht eingebunden; dafür wäre ein sicherer Backend-Dienst nötig.
